@@ -1,9 +1,24 @@
-function random(){
-console.log("Hey there");
 
+const fs = require("fs");
+function readFIleAsync(){
+    return new Promise (function(resolve,reject){
+        fs.readFile("data.txt","utf-8",function(err,data){
+            if(err){
+                reject(err);
+            }else{
+                resolve(data);
+            }
+        });
+    });
 }
-
-let p = new Promise(random)
-console.log(p);
-let d = new Date()
-console.log(d);
+// async function solved(){
+//     let data = await readFIleAsync(5000);
+//     console.log(data);
+// }
+// solved();
+readFIleAsync().then((d)=>{
+    console.log("Data has been read "+d);
+}).catch((e)=>{
+    console.log("Error"+e);
+    
+})
